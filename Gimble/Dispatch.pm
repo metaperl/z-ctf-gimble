@@ -1,0 +1,86 @@
+package Gimble::Dispatch;
+
+use strict;
+
+use base qw(CGI::Prototype);
+#use Class::Autouse;
+
+our %task = (
+
+  home   => 'Gimble::Page::Home::Base',
+
+  signup => 'Gimble::Page::Signup::Base',
+  signup_redo => 'Gimble::Page::Signup::Redo',
+  signup_confirm => 'Gimble::Page::Signup::Confirm',
+  signup_commit   => 'Gimble::Page::Signup::Commit',
+
+  add_clan   => 'Gimble::Page::AddClan::Base',
+  add_clan_confirm   => 'Gimble::Page::AddClan::Confirm',
+  add_clan_commit   => 'Gimble::Page::AddClan::Commit',
+
+  report_match => 'Gimble::Page::ReportMatch::Base',
+  report_match_confirm => 'Gimble::Page::ReportMatch::Confirm',
+  report_match_commit => 'Gimble::Page::ReportMatch::Commit',
+
+  upload_films => 'Gimble::Page::UploadFilms::Base',
+
+  show_rules   => 'Gimble::Page::ShowRules::Base',
+  players   => 'Gimble::Page::Players::Base',
+
+  login   => 'Gimble::Page::Login::Base',
+  login_process   => 'Gimble::Page::Login::Process',
+
+  player_stats   => 'Gimble::Page::PlayerStats::Base',
+
+  viewsrc => 'Gimble::Page::ViewSrc::Base',
+
+);
+
+our %next = (
+  
+  'Gimble::Page::Login::Base'    => 'login_process',
+  'Gimble::Page::Login::Redo'    => 'login_process',
+  'Gimble::Page::Login::Failed'  => 'login_process',
+
+  'Gimble::Page::Signup::Base' => 'signup_confirm',
+  'Gimble::Page::Signup::Redo' => 'signup_confirm',
+  'Gimble::Page::Signup::Confirm' => 'signup_commit',
+
+
+
+  'Gimble::Page::AddClan::Base' => 'add_clan_confirm',
+  'Gimble::Page::AddClan::Redo' => 'add_clan_confirm',
+  'Gimble::Page::AddClan::Confirm' => 'add_clan_commit',
+
+  'Gimble::Page::ReportMatch::Base' => 'report_match_confirm',
+  'Gimble::Page::ReportMatch::Confirm' => 'report_match_commit',
+  'Gimble::Page::ReportMatch::Commit' => 'upload_films',
+
+
+);
+
+sub view_player_url {
+
+  sprintf "/x.cgi?task=player_stats&player_id=%d", shift() ;
+
+}
+
+sub dispatch {
+  my $self = shift;
+
+  my $taski = $self->param('task') || 'home' ;
+
+  warn "<TASK>$taski</TASK>";
+
+
+  my $dispatch = $task{$taski};
+
+  warn "$taski dispatched to => $dispatch";
+  eval "require $dispatch";
+  die $@ if $@;
+  return $dispatch;
+
+}
+
+
+1;

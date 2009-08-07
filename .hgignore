@@ -1,0 +1,8 @@
+syntax: glob
+*~
+films/ladder/*
+Seamstress/Base.pm
+
+syntax: regexp
+(.*/)?\#[^/]*\#$
+

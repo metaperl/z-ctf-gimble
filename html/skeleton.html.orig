@@ -1,0 +1,20 @@
+<html>
+
+  <head id="skelhead">
+
+    <div id="header_head"> 
+    header_head_content
+    </div>
+
+  </head>
+  
+  <body id="skelbody">
+
+    <div id="header_body">dummy</div>
+
+    <div id="local_body"> dymmy</div>
+    <div id="footer">   dymmy   </div>
+
+  </body>
+
+</html>

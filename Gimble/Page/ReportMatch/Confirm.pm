@@ -1,0 +1,112 @@
+package Gimble::Page::ReportMatch::Confirm;
+
+use base qw(Gimble::Page::ReportMatch::Base);
+
+use Gimble::Model::player_t;
+use Gimble::Model::map_t;
+
+our $opp;
+
+
+sub template { require html::report_match;  html::report_match->new; }
+
+sub engine {
+  my ($self, $tree) = @_;
+
+  # kill getinfo output
+  my @getinfo = $tree->look_down(class => 'getinfo');
+  $_->detach for (@getinfo) ;
+
+  # screen_name versus opponent
+  $tree->content_handler(screen_name => $self->logged_in->screen_name);
+
+  $opp = 
+      Gimble::Model::player_t->retrieve($self->CGI->param('opponent_id'));
+
+  $tree->content_handler(opponent => $opp->screen_name);
+
+  my @field = map { 'result_type_select' . $_ } (1..3) ;
+  warn $self->CGI->param($_) for @field;
+  
+  my @results = map {
+    $self->english_results(
+      $self->logged_in->player_id, 
+      $opp->player_id,
+      $self->CGI->param($_)
+     );
+  } @field;
+
+  use Data::Dumper;
+  #warn Dumper \@results;
+
+  # pull the map names out of the database and create the pulldwons
+  # to indicate the results
+  my $map = Gimble::Model::map_t->retrieve_all;
+
+  warn $map;
+
+
+  my $result;
+
+  $tree->table(
+    gi_table => 'results',
+    gi_tr    => 'resiter',
+    table_data =>  $map,
+    tr_data => sub { 
+      $result = shift @results;
+      $map->next 
+    },
+    td_data => sub { 
+      my ($tr_node, $tr_data) = @_;
+      warn "@_";
+      $tr_node->content_handler(map_name => $tr_data->map_name);
+      $tr_node->look_down(id => 'selres')->replace_content($result);
+    }
+   );
+
+
+  $tree
+}
+
+sub respond {
+  my $self = shift;
+
+  my($response_page);
+
+  if ($self->logged_in) {
+    $response_page = $self;
+  } else {
+    $response_page = 'Gimble::Page::NoAuthz::Base';
+    warn $response_page; 
+    eval "require $response_page";
+    $response_page;
+  }
+
+}
+
+
+sub respond_leave {
+  my $self = shift;
+
+  $self->session->save_param($self->CGI);
+
+}
+
+sub english_results {
+  my ($self, $player_id, $opponent_id, $res) = @_;
+
+  warn "@_";
+
+  if ($res == 1) {
+    my $p = Gimble::Model::player_t->retrieve($player_id);
+    $p->screen_name . " won"
+  } elsif ($res == -1) {
+    my $o = Gimble::Model::player_t->retrieve($opponent_id);
+    $o->screen_name . " won";
+  } else {
+    "draw"
+  }
+
+}
+
+1;

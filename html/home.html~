@@ -1,0 +1,31 @@
+<object
+    data="/img/gru.swf"
+    pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+    type="application/x-shockwave-flash"
+    width="600"
+    height="180"
+    loop="true"
+    quality="best"
+    >
+</object>
+
+<h3>Recent Ladder Results</h3>
+
+<table border=1 id=ladder_results>
+
+<tr><th>date</th><th>Results</th></tr>
+
+<tr id=ladder_result>
+
+<td id=battle_date>
+Feburary 12, 2005
+</td>
+
+<td id=battle_result> 
+Dean defeated R
+</td>
+
+</tr>
+
+
+</table>

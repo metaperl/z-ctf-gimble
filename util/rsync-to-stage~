@@ -1,0 +1,4 @@
+SRC=/var/www/terry/gimblerus.com
+TRG=/var/www/terry/perlstorybook.com
+
+rsync -t 

@@ -1,0 +1,8 @@
+#!/bin/bash -x
+
+modules="CGI::Prototype HTML::Seamstress Class::DBI Data::FormValidator Chess::Elo CGI::Session Class::Autouse HTML::FillInForm"
+
+for module in $modules
+do
+  perl -MCPANPLUS -e "install $module"
+done

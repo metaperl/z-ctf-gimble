@@ -1,0 +1,62 @@
+    <h1 class=getinfo>Report Match</h1>
+    <h1 class=validate>Confirm Match Results</h1>
+
+    <form>
+
+      <input type=hidden name=task value=report_match_confirm>
+      
+      <span class="getinfo">
+	<h3>
+	  Ok <span id=screen_name> screen_name </span> who did you play?
+      </h3>
+
+	<select name=opponent_id id=opponent_id>
+	  <option id=opponent_name>  opponent_name </option>
+	</select>
+
+      </span>
+
+      <h2 class=validate>
+	<span id=screen_name>screen_name</span>
+	versus
+	<span id=opponent>opponent</span>
+      </h2>
+
+      <h3 class=getinfo>
+	And the result on each map?
+      </h3>
+
+      <table id=results>
+
+	<tr><th>Map</th> <th>Result</th></tr>
+
+	<tr id=resiter>
+
+	  <td id=map_name>
+	    map_name
+	  </td>
+
+
+	  <td id=selres>
+	    <select name=result_type_select id=result_type_select>
+	      <option id=result_type>  result_type </option>
+	    </select>
+	  </td>
+
+	</tr>
+
+
+
+	<tr><td>
+	    <button type=submit>Record results</button>
+	  </td>
+	</tr>
+
+
+
+      </table>
+
+
+
+
+    </form>

@@ -1,0 +1,89 @@
+<h1 id=task_title>Clans</h1>
+
+<h3 class=validate>Errors in Input</h3>
+
+<ul class=validate id=error_list>
+
+<li id=error_item>email cannot be empty</li>
+
+</ul>
+
+<table>
+<tr>
+<td>
+
+<table id=load_data>
+
+<tr>
+<td>
+Here are the clans in the database so far:</td>
+</tr>
+
+<tr>
+<th>Clan Name</th>
+<th>Abbreviation</th>
+<th>Clan Website</th>
+</tr>
+
+ <tr id="iterate1" class="tr1">
+ 
+         <td id="clan_name">   clan_name   </td>
+         <td id="clan_abbrev"> clan_abbrev </td>
+         <td id="clan_url">    clan_url </td>
+
+ </tr>
+ 
+ <tr id="iterate2" class="tr2">
+ 
+         <td id="clan_name">   clan_name   </td>
+         <td id="clan_abbrev"> clan_abbrev </td>
+         <td id="clan_url">    clan_url </td>
+ 
+ </tr>
+
+</table> 
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+<form action=/cgi-bin/x?task=confirm_clan
+      method=POST>
+
+<input type=hidden name=task value=dynamic>
+<input type=hidden name=CGISESSID value=dynamic>
+
+<table>
+
+<tr>
+<td>
+</td>
+
+</tr>
+
+<tr>
+<td>Clan Name</td>
+<td><input type=text name=clan_name></td>
+</tr>
+
+<tr>
+<td>Clan Abbreviation (usually 3 letters or numbers)</td> 
+<td><input type=text name=clan_abbrev></td>
+</tr>
+
+<tr>
+<td>Clan URL (optional)</td> 
+<td><input type=text name=clan_url></td>
+</tr>
+
+
+<button type=submit>Add Clan</button>
+
+</form>
+
+</td>
+</tr>
+
+</table>

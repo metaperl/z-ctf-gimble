@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+
+BEGIN {
+
+  my $path='~/perl/lib:~/perl:~/perl/share/perl/5.8.4:~/perl/lib/perl/5.8.4';
+  for my $p (split ':', $path) {
+    $p =~ s!~!/home/terry!; 
+    warn $p;
+    unshift @INC, $p;
+  }
+
+  warn "@INC";
+
+}
+
+use base qw(CGI::Prototype);
+
+
+my $o = __PACKAGE__->reflect;
+# The next line returns
+# Class::Prototyped::Mirror=REF(0x816811c) at nullapp.pl line 23.
+# Why does it not return CGI::Prorotype::Mirror=REF
+# or  main::MIRROR=REF
+warn $o;  
+
+# Why does this fail?
+warn $o->engine;
+warn $o->display('hi');
+
+CGI::Prototype->activate;

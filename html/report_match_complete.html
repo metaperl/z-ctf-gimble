@@ -1,0 +1,81 @@
+<h1>Match Results Recorded.</h1>
+
+    <table id=results cellpadding=4 border=1>
+
+      <tr>
+	<th>Map</th><th>Result</th>
+
+	<th>
+	  Rating changes
+	</th>
+
+      </tr>
+
+      <tr id=resiter>
+
+	<td id=map_name>
+	  map_name
+	</td>
+
+
+	<td id=result>
+	  draw
+	</td>
+
+	<td>
+	  <table border=1>
+	    <tr>
+	      <td id=screen_name>screen_name</td>
+	      <td id=p_old>1470</td>
+	      <td id=p_new>1486</td>
+	    </tr>
+	    <tr>
+	      <td id=opponent>opponent</td>
+	      <td id=o_old>1470</td>
+	      <td id=o_new>1486</td>
+	    </tr>
+
+
+	  </table>
+
+	</td>
+
+	
+
+
+      </tr>
+
+
+    </table>
+
+<h2>Film upload (required)</h2>
+<i>Don't hit submit until you have uploaded all 3 films</I>
+<ol>
+<li> Hit Choose. Select one of the films.
+<li> Hit Choose. Select another one of the films.
+<li> Hit Choose. Select the last one of the films.
+<li> Then, hit submit
+</ol>
+
+	<script src="multifile_compressed.js"></script>
+
+<!-- This is the form -->
+<form enctype="multipart/form-data" action="x.cgi" method = "post">
+
+<input type="hidden" name="task" value="upload_films">
+	      <input type="hidden" name=screen_name>
+	      <input type="hidden" name=opponent>
+
+	<!-- The file element -- NOTE: it has an ID -->
+	<input id="my_file_element" type="file" name="file_1" >
+	<input type="submit">
+</form>
+Files:
+<!-- This is where the output will appear -->
+<div id="files_list"></div>
+<script>
+	<!-- Create an instance of the multiSelector class, pass it the output target and the max number of files -->
+	var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), 3 );
+	<!-- Pass in the file element -->
+	multi_selector.addElement( document.getElementById( 'my_file_element' ) );
+</script>

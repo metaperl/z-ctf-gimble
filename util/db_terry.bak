@@ -1,0 +1,237 @@
+-- MySQL dump 9.11
+--
+-- Host: localhost    Database: db_terry
+-- ------------------------------------------------------
+-- Server version	4.0.24_Debian-10-log
+
+--
+-- Table structure for table `battle_t`
+--
+
+CREATE TABLE `battle_t` (
+  `battle_id` int(11) NOT NULL auto_increment,
+  `creation_datetime` timestamp(14) NOT NULL,
+  `winning_player_id` int(11) NOT NULL default '0',
+  `losing_player_id` int(11) NOT NULL default '0',
+  `battle_result` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`battle_id`),
+  UNIQUE KEY `IDX_battle_t1` (`battle_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `battle_t`
+--
+
+INSERT INTO `battle_t` VALUES (56,20050212025638,25,15,1);
+INSERT INTO `battle_t` VALUES (57,20050212025638,15,25,1);
+INSERT INTO `battle_t` VALUES (58,20050212025638,15,25,1);
+INSERT INTO `battle_t` VALUES (59,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (60,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (61,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (62,20050212221959,20,15,1);
+INSERT INTO `battle_t` VALUES (63,20050212221959,15,20,0);
+INSERT INTO `battle_t` VALUES (64,20050212221959,15,20,1);
+INSERT INTO `battle_t` VALUES (65,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (66,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (67,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (68,20050215034430,15,35,1);
+INSERT INTO `battle_t` VALUES (69,20050215034430,35,15,1);
+INSERT INTO `battle_t` VALUES (70,20050215034430,15,35,1);
+INSERT INTO `battle_t` VALUES (71,20050217091442,18,15,1);
+INSERT INTO `battle_t` VALUES (72,20050217091442,18,15,1);
+INSERT INTO `battle_t` VALUES (73,20050217091442,15,18,1);
+INSERT INTO `battle_t` VALUES (74,20050218030524,15,25,1);
+INSERT INTO `battle_t` VALUES (75,20050218030524,25,15,1);
+INSERT INTO `battle_t` VALUES (76,20050218030524,15,25,1);
+INSERT INTO `battle_t` VALUES (77,20050218034154,25,15,1);
+INSERT INTO `battle_t` VALUES (78,20050218034154,25,15,1);
+INSERT INTO `battle_t` VALUES (79,20050218034154,25,15,1);
+INSERT INTO `battle_t` VALUES (80,20050218110926,22,25,1);
+INSERT INTO `battle_t` VALUES (81,20050218110926,25,22,1);
+INSERT INTO `battle_t` VALUES (82,20050218110926,25,22,1);
+INSERT INTO `battle_t` VALUES (83,20050219032917,32,15,0);
+INSERT INTO `battle_t` VALUES (84,20050219032917,32,15,1);
+INSERT INTO `battle_t` VALUES (85,20050219032917,32,15,0);
+INSERT INTO `battle_t` VALUES (100,20050226023605,41,15,1);
+INSERT INTO `battle_t` VALUES (99,20050226023605,15,41,1);
+INSERT INTO `battle_t` VALUES (98,20050226023605,15,41,1);
+INSERT INTO `battle_t` VALUES (89,20050219043444,42,25,0);
+INSERT INTO `battle_t` VALUES (90,20050219043445,25,42,1);
+INSERT INTO `battle_t` VALUES (91,20050219043445,25,42,1);
+INSERT INTO `battle_t` VALUES (92,20050219051024,25,35,1);
+INSERT INTO `battle_t` VALUES (93,20050219051024,25,35,1);
+INSERT INTO `battle_t` VALUES (94,20050219051024,25,35,1);
+INSERT INTO `battle_t` VALUES (95,20050219122018,25,15,1);
+INSERT INTO `battle_t` VALUES (96,20050219122018,15,25,1);
+INSERT INTO `battle_t` VALUES (97,20050219122018,25,15,1);
+INSERT INTO `battle_t` VALUES (101,20050226165533,20,25,1);
+INSERT INTO `battle_t` VALUES (102,20050226165533,20,25,1);
+INSERT INTO `battle_t` VALUES (103,20050226165533,25,20,1);
+INSERT INTO `battle_t` VALUES (104,20050305020102,15,25,1);
+INSERT INTO `battle_t` VALUES (105,20050305020102,15,25,1);
+INSERT INTO `battle_t` VALUES (106,20050305020102,25,15,1);
+INSERT INTO `battle_t` VALUES (178,20050313135922,22,39,1);
+INSERT INTO `battle_t` VALUES (177,20050313135922,39,22,1);
+INSERT INTO `battle_t` VALUES (176,20050313135922,39,22,1);
+INSERT INTO `battle_t` VALUES (167,20050307002853,15,50,0);
+INSERT INTO `battle_t` VALUES (168,20050307002853,15,50,1);
+INSERT INTO `battle_t` VALUES (169,20050307002853,50,15,1);
+INSERT INTO `battle_t` VALUES (170,20050309033721,15,16,0);
+INSERT INTO `battle_t` VALUES (171,20050309033721,15,16,1);
+INSERT INTO `battle_t` VALUES (172,20050309033721,15,16,1);
+INSERT INTO `battle_t` VALUES (173,20050311021656,52,15,1);
+INSERT INTO `battle_t` VALUES (174,20050311021656,15,52,1);
+INSERT INTO `battle_t` VALUES (175,20050311021656,15,52,1);
+INSERT INTO `battle_t` VALUES (179,20050313160515,39,15,1);
+INSERT INTO `battle_t` VALUES (180,20050313160515,15,39,1);
+INSERT INTO `battle_t` VALUES (181,20050313160515,39,15,1);
+INSERT INTO `battle_t` VALUES (182,20050416044757,15,17,1);
+INSERT INTO `battle_t` VALUES (183,20050416044757,17,15,1);
+INSERT INTO `battle_t` VALUES (184,20050416044757,15,17,1);
+INSERT INTO `battle_t` VALUES (193,20050823043800,16,15,1);
+INSERT INTO `battle_t` VALUES (192,20050823043800,16,15,1);
+INSERT INTO `battle_t` VALUES (191,20050823043800,16,15,0);
+INSERT INTO `battle_t` VALUES (188,20050818022621,16,15,0);
+INSERT INTO `battle_t` VALUES (189,20050818022621,16,15,1);
+INSERT INTO `battle_t` VALUES (190,20050818022621,16,15,1);
+INSERT INTO `battle_t` VALUES (194,20050830040830,18,15,0);
+INSERT INTO `battle_t` VALUES (195,20050830040830,18,15,0);
+INSERT INTO `battle_t` VALUES (196,20050830040830,18,15,1);
+INSERT INTO `battle_t` VALUES (197,20050906022151,16,15,0);
+INSERT INTO `battle_t` VALUES (198,20050906022151,16,15,1);
+INSERT INTO `battle_t` VALUES (199,20050906022151,16,15,1);
+
+--
+-- Table structure for table `clan_t`
+--
+
+CREATE TABLE `clan_t` (
+  `clan_id` int(11) NOT NULL auto_increment,
+  `clan_abbrev` varchar(40) NOT NULL default '',
+  `clan_name` varchar(40) NOT NULL default '',
+  `clan_url` varchar(80) default NULL,
+  PRIMARY KEY  (`clan_id`),
+  UNIQUE KEY `IDX_clan_t1` (`clan_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `clan_t`
+--
+
+INSERT INTO `clan_t` VALUES (1,'gru','gimble r\'us','http://www.gimblerus.com');
+INSERT INTO `clan_t` VALUES (2,'poop','PoOp',NULL);
+INSERT INTO `clan_t` VALUES (3,'187','Killed in Action',NULL);
+INSERT INTO `clan_t` VALUES (4,'c.c','Crimson Cavaliers',NULL);
+INSERT INTO `clan_t` VALUES (5,'','No clan','');
+INSERT INTO `clan_t` VALUES (11,'MCC','Madrigal Chamber of Commerce','http://www.madrigalcc.net');
+INSERT INTO `clan_t` VALUES (10,'TC','Tank Clan','http://www.tankclan.net');
+INSERT INTO `clan_t` VALUES (12,'Np','Northern Paladins','');
+INSERT INTO `clan_t` VALUES (13,'RMA','Real Men Alliance','');
+INSERT INTO `clan_t` VALUES (14,'KEU','Knights of the European Union','');
+INSERT INTO `clan_t` VALUES (17,'HTF','Happy Tree Friends','www.happytreefriends.com');
+INSERT INTO `clan_t` VALUES (16,'I.F','i Frikkettoni','');
+INSERT INTO `clan_t` VALUES (18,'TFS','The Forgotten Shadows','http://tfs-online.vonetwork.net');
+
+--
+-- Table structure for table `map_t`
+--
+
+CREATE TABLE `map_t` (
+  `map_id` int(11) NOT NULL auto_increment,
+  `map_name` varchar(40) NOT NULL default '',
+  PRIMARY KEY  (`map_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `map_t`
+--
+
+INSERT INTO `map_t` VALUES (1,'Gimble on the Brain East');
+INSERT INTO `map_t` VALUES (2,'Gimble on the Brain North');
+INSERT INTO `map_t` VALUES (3,'Gimble on the Brain South');
+
+--
+-- Table structure for table `player_battle_t`
+--
+
+CREATE TABLE `player_battle_t` (
+  `player_id` int(11) NOT NULL default '0',
+  `battle_id` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`player_id`,`battle_id`),
+  KEY `IDX_player_battle_t1` (`player_id`),
+  KEY `IDX_player_battle_t2` (`battle_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `player_battle_t`
+--
+
+
+--
+-- Table structure for table `player_t`
+--
+
+CREATE TABLE `player_t` (
+  `player_id` int(11) NOT NULL auto_increment,
+  `clan_id` int(11) default NULL,
+  `screen_name` varchar(40) NOT NULL default '',
+  `login_name` varchar(40) NOT NULL default '',
+  `password` varchar(40) NOT NULL default '',
+  `email` varchar(40) default NULL,
+  `elo_rating` decimal(10,0) NOT NULL default '1600',
+  `last_udpate` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`player_id`),
+  UNIQUE KEY `IDX_player_t1` (`player_id`),
+  KEY `IDX_player_t2` (`clan_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `player_t`
+--
+
+INSERT INTO `player_t` VALUES (39,1,'NeUroMancer','unas','mad0ness','rvocali@tiscali.it','1643',20050818022851);
+INSERT INTO `player_t` VALUES (35,1,'Sirrus','realsirrus','dasirrus','sirrus@gimblerus.com','1474',20050818022851);
+INSERT INTO `player_t` VALUES (41,10,'Subzero','subby','subby','tsnyder@nemr.net','1533',20050818022851);
+INSERT INTO `player_t` VALUES (15,1,'Princepawn','princepawn','myth','terry@hcoop.net','1526',20050906022151);
+INSERT INTO `player_t` VALUES (16,1,'Timmy!!!!!!','buckweaver','myth','macliverdamage@yahoo.com','1654',20050906022151);
+INSERT INTO `player_t` VALUES (17,1,'powrup','nn7f','myth','nn7f@aol.com','1572',20050818022851);
+INSERT INTO `player_t` VALUES (18,1,'ThE BlAcKniGhT','Longjohn','grusome','phil@pacificorca.com','1639',20050830040830);
+INSERT INTO `player_t` VALUES (19,1,'da bad monkey','Monkey','vikings','srupp@visi.com','1600',20050211004829);
+INSERT INTO `player_t` VALUES (20,1,'Sam The Butcher','uglyed','zowie','fuglyed@aol.com','1737',20050818022851);
+INSERT INTO `player_t` VALUES (21,1,'SwashBuckler Pete','pprocess1','rogers70','rborchardt1@wi.rr.com','1600',20050205211758);
+INSERT INTO `player_t` VALUES (22,1,'KARASHI','KARASHI','5623','glide@mtj.biglobe.ne.jp','1530',20050818022851);
+INSERT INTO `player_t` VALUES (23,1,'GrogMonster','GrogMonster','newsnews','GregSalmon@aol.com','1600',20050205211758);
+INSERT INTO `player_t` VALUES (24,2,'Xylene','xylene','kjellk','kjell.kauppi@mail.ardalsnett.no','1600',20050214230523);
+INSERT INTO `player_t` VALUES (25,1,'URzooked','tj0299','all2mit','tj0299@yahoo.com','1631',20050818022851);
+INSERT INTO `player_t` VALUES (32,0,'bryce','bryce','lv426','sperkins@student.uchc.edu','1585',20050818022851);
+INSERT INTO `player_t` VALUES (27,1,'Soulblaster','Soulblaster','bh1970','mysurveys70@aol.com','1600',20050205211758);
+INSERT INTO `player_t` VALUES (42,0,'m3718','montasir','xmxoubl2','m3718@hotpop.com','1521',20050818022851);
+INSERT INTO `player_t` VALUES (52,3,'Tibbo','slayertibbo','fucker','tibba@pot.com','1556',20050818022851);
+INSERT INTO `player_t` VALUES (45,0,'lil rascal','rockna','jiggy','tlloyd@ucsd.edu','1600',20050225001152);
+INSERT INTO `player_t` VALUES (46,0,'Two Smoking Guns','roady42','ftsillok','roadhouse@pcweb.net','1600',20050301195803);
+INSERT INTO `player_t` VALUES (47,1,'Inquisitor','Inquisitor','Inq','inq@tpg.com.au','1600',20050302142656);
+INSERT INTO `player_t` VALUES (48,17,'Toothy','blacknight888','barred','andylin127@gmail.com','1600',20050313155816);
+INSERT INTO `player_t` VALUES (49,17,'Sniffles','06Garrick','barred','michael_dallaire@yahoo.ca','1600',20050313155816);
+INSERT INTO `player_t` VALUES (50,0,'Iron Spike','Iron Spike','coffin','concretebuyouts@aol.com','1595',20050818022851);
+INSERT INTO `player_t` VALUES (51,1,'grogmonster','grogmonster','fun','gregsalmon@aol.com','1600',20050307161400);
+INSERT INTO `player_t` VALUES (53,5,'Von Paulus','vonpaulus','harley','vonpaulus@ntlworld.com','1600',20050314200039);
+INSERT INTO `player_t` VALUES (59,5,'Thorin','bmccabe2','rx8','bernard@dreamscape-design.co.uk','1600',20050818121031);
+INSERT INTO `player_t` VALUES (56,5,'Frodo','frodorix','tolkien.','jberghr@yahoo.ca','1600',20050624013540);
+INSERT INTO `player_t` VALUES (57,5,'Flatline','Flatline','hi','Flatline005@hotmail.com','1600',20050624060242);
+INSERT INTO `player_t` VALUES (58,3,'Warp','kickmyhead','balle','delcoolio@hotmail.com','1600',20050715112401);
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(32) NOT NULL default '',
+  `a_session` text,
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `sessions`
+--
+
+

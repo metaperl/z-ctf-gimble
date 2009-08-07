@@ -1,0 +1,14 @@
+<html>
+<body>
+
+<h3>victory recorded!</h3>
+
+<span class=text::cgi.winner>Pawn</span> 
+defeated 
+<span class=text_this_for_that::"login_name"::"screen_name"::cgi.loser::"player">
+Myrk
+</span>
+
+
+</body>
+</html>

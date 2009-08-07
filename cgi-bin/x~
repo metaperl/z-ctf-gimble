@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+use strict;
+
+
+
+BEGIN {
+
+  my %base = (
+    'www.gimbler.us' => 
+      '/afs/hcoop.net/user/t/te/terry/domains/us/gimbler/dev',
+    'dev.gimbler.us' => 
+      '/afs/hcoop.net/user/t/te/terry/domains/us/gimbler/dev'
+
+   );
+
+  warn $ENV{HTTP_HOST};
+  my $base = $base{ $ENV{HTTP_HOST} } ;
+
+  warn "<base>$base</base>";
+  unshift @INC, $base ;
+
+  my $path="~/perl5/lib:~/perl5:~/perl5/share/perl/5.8.8:~/perl5/i486-linux-gnu-thread-multi:$base";
+  for my $p (split ':', $path) {
+      $p =~ s!~!/afs/hcoop.net/user/t/te/terry!;
+       warn $p;
+    unshift @INC, $p;
+  }
+  warn "<inc>@INC</inc>";
+}
+
+#use local::lib;
+
+BEGIN { ++$| }
+
+
+
+use Gimble::Page::Base;
+Gimble::Page::Base->activate;
+
+

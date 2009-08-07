@@ -1,0 +1,49 @@
+package Gimble::Page::AddClan;
+
+use base qw(Gimble::Page::Base);
+
+
+use Gimble::Model::clan_t;
+
+warn __PACKAGE__;
+
+sub template {
+  require html::addclan;
+  my $tree = html::addclan->new;
+
+  $tree->look_down(name => 'task')->attr(value => 'add_clan_validate');
+
+  my $clan = Gimble::Model::clan_t->search_where(
+    clan_id => { '>', 0 }
+   ) ;
+
+  use Data::Dumper;
+  #  warn Dumper $clan;
+  my @validate = $tree->look_down(class => 'validate');
+  #  warn "@validate";
+  $_->detach for (@validate) ;
+
+  warn $clan;
+
+  $tree->table(
+    gi_table     => 'load_data', 
+    gi_tr        => [qw(iterate1 iterate2)],
+    table_data      => $clan,
+    tr_data      => sub {
+      my ($self, $data) = @_;
+      warn $data;
+      $data->next
+    },
+    td_data  => sub {
+      my ($tr_node, $tr_data) = @_;
+      $tr_node->content_handler($_ => $tr_data->$_) 
+	  for qw(clan_name clan_abbrev clan_url) ;
+    },
+   );
+
+
+  $tree
+
+
+}
+1;

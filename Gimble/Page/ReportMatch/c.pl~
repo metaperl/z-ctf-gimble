@@ -1,0 +1,7 @@
+use Set::Array;
+
+  my @results = (
+    [ 1  => "%s won"   ],
+    [ 0  => "draw"  ],
+    [-1  => "%s lost"  ]
+   );

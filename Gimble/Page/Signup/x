@@ -1,0 +1,66 @@
+package Gimble::Page::Signup::Validate;
+
+use base qw(Gimble::Page::Base);
+
+use Class::Autouse;
+use Data::Dumper;
+use Data::FormValidator;
+
+
+sub check_passwords {
+  my ( $pw1, $pw2 ) = @_;
+  if ( $pw1 eq $pw2 ) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+our $dfv_profile =  {
+  msgs        => { format => '%s' },
+  required    => [ qw(screen_name login_name clan_id password email) ],
+  constraints => {
+    email     => 'email',
+    password  => {
+                'constraint' => \&check_passwords,
+                'params'     => [ qw( password password_again ) ],
+    },
+  }
+};
+
+
+
+sub respond {
+  my $self = shift;
+
+  warn "self: $self";
+
+  my $results = Data::FormValidator->check( $self->CGI, $dfv_profile );
+
+  warn Dumper($results);
+
+  my $response_page;
+
+  if ( $results->has_missing() || $results->has_invalid() ) {
+    # There was something wrong w/ the data...
+    $response_page = 'Gimble::Page::Signup::Redo';
+    $self->reflect->addSlots( results => $results );
+  } else {
+    $response_page = 'Gimble::Page::Signup::Confirm';
+  }
+
+  warn $response_page;
+  Class::Autouse->autouse($response_page);
+  return $response_page;
+}
+
+sub template {
+  require html::signup;
+  my $tree = html::signup->new;
+
+
+  $tree
+
+
+}
+1;

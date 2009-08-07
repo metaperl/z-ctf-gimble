@@ -1,0 +1,17 @@
+<html>
+
+  <head>
+
+    <span id="header_head"> </span>
+
+  </head>
+  
+  <body>
+
+    <span id="header_body">dummy </span>
+    <span id="local_body"> dymmy </span>
+    <span id="footer">   dymmy   </span>
+
+  </body>
+
+</html>

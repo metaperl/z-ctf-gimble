@@ -1,0 +1,161 @@
+BODY {
+    background: black; 
+    color: white;
+  font-family: Georgia, "Times New Roman", Times, serif; 
+    font-size: 12pt;
+}
+
+
+
+.tr1{ 
+background: #008800;
+}
+
+.tr2{ 
+background: #000055;
+}
+
+#logo {
+    color: #e53;
+    font-size: 6px;
+    padding-bottom: 10px;
+}
+
+#logo .cursor {
+    color: green;
+    text-decoration: blink;
+}
+
+#nav {
+    position: absolute;
+    left: 10px;
+    width: 150px;
+}
+
+#nav DIV.a {
+    border: 1px solid #900;
+    margin-bottom: 1em; 
+}
+
+#nav DIV.b {
+    font-size: 15px;
+    background: #300;
+    color: white;
+    line-height: 30px;
+    vertical-align: middle;
+    font-weight: bold;
+    text-indent: 5px;
+    border-top: 1px solid #300; 
+    border-bottom: 1px solid #300; 
+}
+
+#nav DIV.b:HOVER {
+    background: #600; 
+    border-top: 1px solid #900;
+    border-bottom: 1px solid #900;
+}
+
+#nav DIV.b DIV {
+    background: black;
+    font-weight: normal;
+}
+
+#nav H1 {
+    font-size: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: normal;
+    text-align: left;
+}
+
+#nav A {
+    color: silver;
+    display: block;
+    max-height: 30px;
+    text-decoration: none;
+}
+
+#nav A:HOVER {
+    background: #400;
+    color: white;
+}
+
+#body {
+    position: absolute;
+    background: black;
+    left: 170px;
+    width: 450px;
+    padding-top: 0px;
+    line-height: 150%;
+}
+
+P, UL {
+    margin-top: 0px;
+}
+
+#body H1, H2, H3, H4, H5, H6 {
+    background: #003; 
+    margin-top: 0px;
+    border: 1px solid #009; 
+    padding: 3px;
+    color: white;
+    line-height: 110%;
+}
+
+H3, H4, H5, H6 {
+    margin-bottom: 0px; 
+}
+
+#body PRE, #body TT {
+    background: #300; 
+    border: 1px solid #800; 
+    padding: 1px; 
+    font-size: 10pt;
+}
+
+#body PRE {
+    line-height: 100%;
+}
+
+A {
+    color: #CCFF66;
+    text-decoration: none; 
+}
+
+A[target="_blank"] {
+    color: #e53;
+}
+
+A:HOVER {
+    text-decoration: underline; 
+}
+
+LI {
+    margin-bottom: 1ex; 
+}
+
+.left {
+    float: left; 
+    width: 8em;  
+}
+
+INPUT, TEXTAREA {
+    background: #300; 
+    color: white;
+    border: 1px solid #800;
+    margin-bottom: 2px; 
+}
+
+EM {
+    color: #ff8;
+}
+
+#ad {
+    position: absolute;
+    right: 10px;
+}
+
+#bottom {
+    color: silver;
+    font-size: 80%;
+}

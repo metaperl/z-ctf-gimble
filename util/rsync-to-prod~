@@ -1,0 +1,6 @@
+#!/bin/bash -x
+
+SRC=/var/www/terry/gimblerus.com/
+TRG=/var/www/terry/perlstorybook.com/
+
+rsync --verbose --archive --recursive $SRC $TRG

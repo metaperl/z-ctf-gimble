@@ -1,0 +1,49 @@
+<h1>Match Results Recorded.</h1>
+
+    <table id=results cellpadding=4 border=1>
+
+      <tr>
+	<th>Map</th><th>Result</th>
+
+	<th>
+	  Rating changes
+	</th>
+
+      </tr>
+
+      <tr id=resiter>
+
+	<td id=map_name>
+	  map_name
+	</td>
+
+
+	<td id=result>
+	  draw
+	</td>
+
+	<td>
+	  <table border=1>
+	    <tr>
+	      <td id=screen_name>screen_name</td>
+	      <td id=p_old>1470</td>
+	      <td id=p_new>1486</td>
+	    </tr>
+	    <tr>
+	      <td id=opponent>opponent</td>
+	      <td id=o_old>1470</td>
+	      <td id=o_new>1486</td>
+	    </tr>
+
+
+	  </table>
+
+	</td>
+
+	
+
+
+      </tr>
+
+
+    </table>

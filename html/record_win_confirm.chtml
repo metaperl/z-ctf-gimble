@@ -1,0 +1,20 @@
+<html>
+<body>
+
+<h3 class=load_session>confirmation</h3>
+
+<form action=record_win.chtml method=post>
+
+<span id=winner>Winner</span>
+
+<B>defeated</B>
+
+<span id=loser>Loser</span>
+
+<button type=submit>Press to confirm</button>
+
+</form>
+
+
+</body>
+</html>

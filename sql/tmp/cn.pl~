@@ -1,0 +1,10 @@
+open C, 'cn.out' or die $!;
+
+use DBI;
+use strict;
+
+my $dbh = DBI->connect('dbi:mysql:db_terry', 'terry', 'stLcmp904c.85!!');
+
+while (<C>) {
+  my @data = split /\t/ ;
+  

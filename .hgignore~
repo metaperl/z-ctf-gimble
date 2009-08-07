@@ -1,0 +1,8 @@
+^(.*/)?\.svn/$
+^redick/parser/$
+^redick/lexer/$
+^redick/node/$
+^redick/analysis/$
+^\.classpath$
+^\.project$
+^.*\.class$

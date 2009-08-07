@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+DB_ORIG=terry_gimblerus
+DB_BAK=terry_gimblerus_dev
+
+FILE_BAK="$DB_ORIG.bak"
+
+
+mysqldump $DB_ORIG > $FILE_BAK
+
+mysql -e "drop   database $DB_BAK"
+mysql -e "create database $DB_BAK"
+
+mysql $DB_BAK < $FILE_BAK 
+
+gzip --force --best $FILE_BAK

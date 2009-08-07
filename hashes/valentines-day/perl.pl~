@@ -1,0 +1,44 @@
+%loves = (
+  
+  "Tammy" => "Bob",
+  "Susan" => "Bill",
+  "Patricia" => "Marko"
+
+ );
+
+%girls_house = (
+  "Tammy" => 'Schenectady, NY',
+  'Susan' => 'Yonkers, NY',
+  'Patricia' => 'Kinderhook, NY'
+ );
+
+while (my ($girl, $boy) = each %loves) {
+  print "$girl loves $boy \n";
+}
+
+my %boy_loves = reverse %loves;
+
+use Data::Dumper;
+print Dumper \%boy_loves;
+
+for my $boy (keys %boy_loves) {
+  print "$boy loves $boy_loves{$boy} \n";
+}
+
+
+%vehicle = (
+
+  "Marko" => 'Station Wagon',
+  'Bill'  => 'motorcycle',
+  'Bob'   => 'Volvo'
+
+);
+
+for my $boy (keys %vehicle) {
+  print 
+      "It is Valentine's day and $boy drove his
+$vehicle{$boy} and went to visit $boy_loves{$boy}
+in $girls_house{$boy_loves{$boy}} \n";
+}
+
+

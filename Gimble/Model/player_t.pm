@@ -1,0 +1,166 @@
+package Gimble::Model::player_t;
+
+use base qw(Gimble::Model);
+
+use Class::DBI::AbstractSearch;
+use Chess::Elo;
+use Data::Dumper;
+
+our $inactive_days     = 15;
+our $provisional_shelf = 9;
+
+__PACKAGE__->autoupdate(1);
+
+__PACKAGE__->table('player_t');
+__PACKAGE__->columns( Primary => 'player_id' );
+
+__PACKAGE__->columns(
+  Essential => qw/clan_id screen_name login_name password email elo_rating/
+ );
+
+__PACKAGE__->columns(
+  TEMP => qw/max_elo min_elo avg_elo wins losses draws seconds_since_last_battle days_since_last_battle total_battles text_elo/
+ );
+
+__PACKAGE__->has_a(clan_id => 'Gimble::Model::clan_t');
+
+__PACKAGE__->has_many(battle => 'Gimble::Model::player_battle_t');
+
+sub attempt_login {
+  my ($self, $login_name, $password) = @_;
+  
+  warn "player_t::attempt_login with $login_name AND $password";
+
+  my $user = __PACKAGE__->search(
+    login_name => $login_name,
+    password   => $password
+   );
+
+  $user;
+}
+
+sub inactive {
+  my ($player) = @_;
+  
+  warn $player->clan_id;
+
+  my ($s) = $player->search_days_since_last_battle(
+    $player->player_id, $player->player_id
+   );
+
+  warn Dumper($s);
+
+
+  my $inactive_hours = $inactive_days * 24;
+  my $inactive_minutes = $inactive_hours * 60;
+  my $inactive_seconds = $inactive_minutes * 60;
+
+  warn  $s->days_since_last_battle, ' - ', $inactive_days;
+
+  ($s->days_since_last_battle - $inactive_days)
+
+}
+
+__PACKAGE__->set_sql(wins => qq{
+  SELECT COUNT(*) as wins
+    FROM battle_t
+   WHERE winning_player_id = ? AND battle_result <> 0
+});
+
+__PACKAGE__->set_sql(losses => qq{
+  SELECT COUNT(*) as losses
+    FROM battle_t
+   WHERE losing_player_id = ? AND battle_result <> 0
+});
+
+__PACKAGE__->set_sql(draws => qq{
+  SELECT COUNT(*) as draws
+    FROM battle_t
+   WHERE ((losing_player_id = ?) OR (winning_player_id = ?))
+     AND battle_result = 0
+});
+
+__PACKAGE__->set_sql(total_battles => qq{
+  SELECT COUNT(*) as total_battles
+    FROM battle_t
+   WHERE ((losing_player_id = ?) OR (winning_player_id = ?))
+});
+
+__PACKAGE__->set_sql(seconds_since_last_battle => qq{
+   SELECT TIME_TO_SEC(NOW())-TIME_TO_SEC(creation_datetime) as seconds_since_last_battle
+     FROM battle_t 
+    WHERE winning_player_id = ? OR losing_player_id = ?
+ ORDER BY creation_datetime DESC LIMIT 1;
+});
+
+__PACKAGE__->set_sql(days_since_last_battle => qq{
+   SELECT TO_DAYS(NOW())-TO_DAYS(creation_datetime) as days_since_last_battle
+     FROM battle_t 
+    WHERE winning_player_id = ? OR losing_player_id = ?
+ ORDER BY creation_datetime DESC LIMIT 1;
+});
+
+__PACKAGE__->set_sql(all_but => qq{
+   SELECT * 
+     FROM player_t
+    WHERE player_id <> ?
+ ORDER BY screen_name ASC
+});
+
+__PACKAGE__->set_sql(
+  reset_elo => qq{
+  UPDATE __TABLE__
+     SET elo_rating = 1600
+});
+
+__PACKAGE__->set_sql(
+  overall_stats => qq{
+    SELECT MAX(elo_rating) as max_elo,
+           MIN(elo_rating) as min_elo,
+           AVG(elo_rating) as avg_elo
+      FROM player_t
+ });
+
+__PACKAGE__->add_constructor(screen_name_from_login_name => 'login_name = ?');
+
+__PACKAGE__->add_constructor(screen_name_from_player_id => 'player_id = ?');
+
+
+
+sub elo_update {
+  my($b) = @_;
+
+  my $w = Gimble::Model::player_t->retrieve($b->winning_player_id);
+  my $l = Gimble::Model::player_t->retrieve($b->losing_player_id);
+
+  my %ret = ( 
+    w => { old => $w->elo_rating },
+    l => { old => $l->elo_rating }
+   ) ;
+
+  ++$|;
+
+  use Data::Dumper;
+  warn Dumper \%ret;
+  warn $b->battle_result;
+
+  my ($new_w, $new_l) = Chess::Elo::elo(
+    $w->elo_rating,
+    (not $b->battle_result) ? 0.5 : 1,
+    $l->elo_rating,
+   );
+
+  warn $new_w;
+
+  $ret{w}{new} = $new_w;
+  $ret{l}{new} = $new_l;
+
+  warn sprintf "From %f to %f", $w->elo_rating, $new_w;
+  warn sprintf "From %f to %f", $l->elo_rating, $new_l;
+  $w->elo_rating($new_w);
+  $l->elo_rating($new_l);
+
+}
+
+
+1;

@@ -1,0 +1,24 @@
+<html>
+<body>
+
+<h3 class=load_session>congratulations <span class=text::player.screen_name>Drizzt</span>!</h3>
+who did you beat?
+<form method=post action=record_win_confirm.chtml>
+
+<select name=loser class=load_players>
+  <option value=x class="next_player value::curset.login_name text::curset.screen_name">
+    screen name
+  </option>
+</select>
+
+
+<input type=submit>
+
+</form>
+
+<P>
+<B>NOTE</B> You must have <i>logged in</I> at least once and had a cookie set
+before your results will be reported.
+
+</body>
+</html>

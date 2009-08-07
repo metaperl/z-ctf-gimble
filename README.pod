@@ -1,0 +1,150 @@
+=head1 README
+
+README for the www.gimblerus.com website
+
+=head1 OVERVIEW
+
+L<http://www.gimblelrus.com> is a website implemented using the
+following technologies: 
+
+=over
+
+=item * CGI::Prototype
+
+CGI interaction with the user is done with Randal's Schwartz' new
+module CGI::Prototype. It is a prototype-based object system which
+allowed for easy handling of sessioning, rendering, authentication,
+and authorization.
+
+=item * Class::DBI
+
+Class::DBI is a wildly popular Perl module for accessing database from
+Perl
+
+=item * Data::FormValidator
+
+DFV is used to validate forms and notify the user if he made form
+input errors
+
+=item * HTML::Seamstress
+
+Seamstress is used to dynamically unroll the html
+
+=item * CGI::Session
+
+Session management is handled by CGI::Session
+
+=back
+ 
+=head2 Directory Structure
+
+=over 
+
+=item * Gimble
+
+contains Gimble::Model (the Class::DBI classes) and
+Gimble::Page (the CGI::Prototype classes)
+
+=item * cgi-bin
+
+contains the file C<x> which is the CGI script which drives the entire
+application
+
+UPDATE: x.cgi moved to docroot. Much easier to work with webmin this way.
+
+=item * html
+
+contains the html templates. ALSO NOTE: the Seamstress compiler,
+seamc, generates .pm files for each html file and they are stored here
+as well.
+
+=item * img
+
+images
+
+=item * js 
+
+javascript (this directory is not used). I was going to create
+sortable tables using this but instead did the sorting via Class::DBI 
+
+=item * maps
+
+this is stuff for people to download. not relevant to seeing it work.
+
+=item * sql
+
+C<sql/ddl> is the directory that created the database
+
+=item * util
+
+various files for synchronizing the production and dev environments
+and dumping the database.
+
+=back
+
+=head1 INSTALLATION
+
+=over
+
+=item * In Gimble/Model.pm
+
+there are some settings which configure which DBI dsn to use based on
+the domain that is being served. I do dev work on perlstorybook.com
+and the production site is gimblerus.com and I have a different database
+for each.
+
+you need to setup the hash so that it gives the correct dsn and the
+array C<@user_pass> so that it has the right username and password.
+
+=item * in util
+
+the file db_terry.bak contains the SQL to create the tables and
+populate them with information
+
+=item * Apache
+
+Here is my setup for running under CGI. You might have to tweak things
+a bit:
+
+ <VirtualHost *>
+	ServerName www.gimblerus.com
+	ErrorLog /var/log/apache/www.gimblerus.com-error.log
+	CustomLog /var/log/apache/www.gimblerus.com-access.log combined
+	IndexOptions FancyIndexing FoldersFirst
+	ServerAlias gimblerus.com
+	ServerAdmin webmaster@gimblerus.com
+	DocumentRoot /var/www/terry/gimblerus.com
+	<Location />
+		Options +Includes +IncludesNOEXEC
+	</Location>
+	RewriteEngine on
+	RewriteCond	%{HTTP_HOST} !^www\.gimblerus\.com [NC]
+	RewriteCond	%{HTTP_HOST} !^$ 
+	RewriteRule	^/(.*) http://www.gimblerus.com/$1 [L,R]
+	<Directory /var/www/terry/gimblerus.com/cgi-bin>
+		Options ExecCGI
+		SetHandler cgi-script
+	</Directory>
+	#	ScriptAlias /cgi-bin/ "/var/www/terry/gimblerus.com/cgi-bin/"
+	# instead enable .cgi to run cgis
+	User terry
+	Group terry
+ </VirtualHost>
+
+
+=ack
+
+=head1 domain dependencies
+
+* HTML::Seamstress::Base
+* which database to use
+
+
+
+=head1 AUTHOR
+
+Terrence Brannon, bauhaus@metaperl.com
+
+irc://EFNet/#perlhelp  (id: schemelab)
+irc://Freenode/#perl6  (id: schemelab)
+

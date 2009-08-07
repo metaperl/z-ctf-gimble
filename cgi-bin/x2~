@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use strict;
+
+BEGIN {
+  my $path='~/perl/lib:~/perl:~/perl/share/perl/5.8.4:~/perl/lib/perl/5.8.4:~/public_html/gimblerus.com';
+  for my $p (split ':', $path) {
+    $p =~ s!~!/home/terry!; 
+    #   warn $p;
+    unshift @INC, $p;
+  }
+  #  warn "@INC";
+}
+
+BEGIN { ++$| }
+
+use base qw(Gimble::Page::Base);
+
+__PACKAGE__->activate;
+

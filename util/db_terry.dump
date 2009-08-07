@@ -1,0 +1,161 @@
+-- MySQL dump 9.11
+--
+-- Host: localhost    Database: db_terry
+-- ------------------------------------------------------
+-- Server version	4.0.23_Debian-4-log
+
+--
+-- Table structure for table `battle_t`
+--
+
+CREATE TABLE `battle_t` (
+  `battle_id` int(11) NOT NULL auto_increment,
+  `creation_datetime` timestamp(14) NOT NULL,
+  `winning_player_id` int(11) NOT NULL default '0',
+  `losing_player_id` int(11) NOT NULL default '0',
+  `battle_result` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`battle_id`),
+  UNIQUE KEY `IDX_battle_t1` (`battle_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `battle_t`
+--
+
+INSERT INTO `battle_t` VALUES (56,20050212025638,25,15,1);
+INSERT INTO `battle_t` VALUES (57,20050212025638,15,25,1);
+INSERT INTO `battle_t` VALUES (58,20050212025638,15,25,1);
+INSERT INTO `battle_t` VALUES (59,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (60,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (61,20050212031924,15,25,1);
+INSERT INTO `battle_t` VALUES (62,20050212221959,20,15,1);
+INSERT INTO `battle_t` VALUES (63,20050212221959,15,20,0);
+INSERT INTO `battle_t` VALUES (64,20050212221959,15,20,1);
+INSERT INTO `battle_t` VALUES (65,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (66,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (67,20050214004836,20,15,1);
+INSERT INTO `battle_t` VALUES (68,20050215034430,15,35,1);
+INSERT INTO `battle_t` VALUES (69,20050215034430,35,15,1);
+INSERT INTO `battle_t` VALUES (70,20050215034430,15,35,1);
+INSERT INTO `battle_t` VALUES (71,20050217091442,18,15,1);
+INSERT INTO `battle_t` VALUES (72,20050217091442,18,15,1);
+INSERT INTO `battle_t` VALUES (73,20050217091442,15,18,1);
+
+--
+-- Table structure for table `clan_t`
+--
+
+CREATE TABLE `clan_t` (
+  `clan_id` int(11) NOT NULL auto_increment,
+  `clan_abbrev` varchar(40) NOT NULL default '',
+  `clan_name` varchar(40) NOT NULL default '',
+  `clan_url` varchar(80) default NULL,
+  PRIMARY KEY  (`clan_id`),
+  UNIQUE KEY `IDX_clan_t1` (`clan_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `clan_t`
+--
+
+INSERT INTO `clan_t` VALUES (1,'gru','gimble r\'us','http://www.gimblerus.com');
+INSERT INTO `clan_t` VALUES (2,'poop','PoOp',NULL);
+INSERT INTO `clan_t` VALUES (3,'187','Killed in Action',NULL);
+INSERT INTO `clan_t` VALUES (4,'c.c','Crimson Cavaliers',NULL);
+INSERT INTO `clan_t` VALUES (0,'','No clan','');
+INSERT INTO `clan_t` VALUES (11,'MCC','Madrigal Chamber of Commerce','http://www.madrigalcc.net');
+INSERT INTO `clan_t` VALUES (10,'TC','Tank Clan','');
+INSERT INTO `clan_t` VALUES (12,'Np','Northern Paladins','');
+INSERT INTO `clan_t` VALUES (13,'RMA','Real Men Alliance','');
+INSERT INTO `clan_t` VALUES (14,'KEU','Knights of the European Union','');
+INSERT INTO `clan_t` VALUES (15,'‹c?J›','White House Whores','www.tflagents.com');
+INSERT INTO `clan_t` VALUES (16,'I.F','i Frikkettoni','');
+
+--
+-- Table structure for table `map_t`
+--
+
+CREATE TABLE `map_t` (
+  `map_id` int(11) NOT NULL auto_increment,
+  `map_name` varchar(40) NOT NULL default '',
+  PRIMARY KEY  (`map_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `map_t`
+--
+
+INSERT INTO `map_t` VALUES (1,'Gimble on the Brain East');
+INSERT INTO `map_t` VALUES (2,'Gimble on the Brain North');
+INSERT INTO `map_t` VALUES (3,'Gimble on the Brain South');
+
+--
+-- Table structure for table `player_battle_t`
+--
+
+CREATE TABLE `player_battle_t` (
+  `player_id` int(11) NOT NULL default '0',
+  `battle_id` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`player_id`,`battle_id`),
+  KEY `IDX_player_battle_t1` (`player_id`),
+  KEY `IDX_player_battle_t2` (`battle_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `player_battle_t`
+--
+
+
+--
+-- Table structure for table `player_t`
+--
+
+CREATE TABLE `player_t` (
+  `player_id` int(11) NOT NULL auto_increment,
+  `clan_id` int(11) default NULL,
+  `screen_name` varchar(40) NOT NULL default '',
+  `login_name` varchar(40) NOT NULL default '',
+  `password` varchar(40) NOT NULL default '',
+  `email` varchar(40) default NULL,
+  `elo_rating` decimal(10,0) NOT NULL default '1600',
+  `last_udpate` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`player_id`),
+  UNIQUE KEY `IDX_player_t1` (`player_id`),
+  KEY `IDX_player_t2` (`clan_id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `player_t`
+--
+
+INSERT INTO `player_t` VALUES (39,16,'NeUroMancer','unas','mad0ness','rvocali@tiscali.it','1600',20050217180043);
+INSERT INTO `player_t` VALUES (35,1,'Sirrus','realsirrus','dasirrus','sirrus@gimblerus.com','1583',20050215034430);
+INSERT INTO `player_t` VALUES (15,1,'Princepawn','princepawn','myth','terry@hcoop.net','1597',20050217091442);
+INSERT INTO `player_t` VALUES (16,1,'Timmy!!!!!!','buckweaver','myth','macliverdamage@yahoo.com','1600',20050211004829);
+INSERT INTO `player_t` VALUES (17,1,'powrup','nn7f','myth','nn7f@aol.com','1600',20050211004829);
+INSERT INTO `player_t` VALUES (18,1,'ThE BlAcKniGhT','Longjohn','grusome','phil@pacificorca.com','1612',20050217091442);
+INSERT INTO `player_t` VALUES (19,1,'da bad monkey','Monkey','vikings','srupp@visi.com','1600',20050211004829);
+INSERT INTO `player_t` VALUES (20,1,'Sam The Butcher','uglyed','zowie','fuglyed@aol.com','1650',20050214005015);
+INSERT INTO `player_t` VALUES (21,1,'SwashBuckler Pete','pprocess1','rogers70','rborchardt1@wi.rr.com','1600',20050205211758);
+INSERT INTO `player_t` VALUES (22,1,'KARASHI','KARASHI','5623','glide@mtj.biglobe.ne.jp','1600',20050211004829);
+INSERT INTO `player_t` VALUES (23,1,'GrogMonster','GrogMonster','newsnews','GregSalmon@aol.com','1600',20050205211758);
+INSERT INTO `player_t` VALUES (24,2,'Xylene','xylene','kjellk','kjell.kauppi@mail.ardalsnett.no','1600',20050214230523);
+INSERT INTO `player_t` VALUES (25,1,'URzooked','tj0299','all2mit','tj0299@yahoo.com','1541',20050212031924);
+INSERT INTO `player_t` VALUES (32,0,'bryce','bryce','lv426','sperkins@student.uchc.edu','1600',20050215032801);
+INSERT INTO `player_t` VALUES (27,1,'Soulblaster','Soulblaster','bh1970','mysurveys70@aol.com','1600',20050205211758);
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(32) NOT NULL default '',
+  `a_session` text,
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `sessions`
+--
+
+

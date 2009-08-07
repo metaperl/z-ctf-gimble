@@ -1,0 +1,8 @@
+use strict;
+
+use DBI;
+
+
+my $dbh = DBI->connect('dbi:mysql:db_terry');
+
+warn $dbh;

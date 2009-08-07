@@ -1,0 +1,67 @@
+<h1 id=task_title>Signup</h1>
+
+<h3 class=validate>Errors in Input</h3>
+
+<ul class=validate id=error_list>
+
+<li id=error_item>email cannot be empty</li>
+
+</ul>
+
+
+<form action=/cgi-bin/x
+      method=POST>
+
+<input type=hidden name=task value=dynamic>
+
+<table>
+
+<tr>
+<td align=right>Screen Name</td> 
+<td><input type=text name=screen_name></td>
+</tr>
+
+<tr>
+<td align=right>Login Name </td> 
+<td><input type=text name=login_name></td>
+</tr>
+
+<tr>
+<td align=right>Password <b id=password_note></b></td> 
+<td><input type=password name=password></td>
+</tr>
+
+<tr id=tr_password_again>
+<td align=right>Password (Again)</td> 
+<td><input type=password name=password_again></td>
+</tr>
+
+
+<tr>
+<td align=right>
+Clan Name 
+</td> 
+<td>
+<select id=clan_id name=clan_id>
+ <option id=clan_option>  clan_name </option>
+</select>
+</td>
+</tr>
+
+
+<tr>
+<td align=right>Email</td> 
+<td><input type=text name=email></td>
+</tr>
+
+<tr>
+<td></td>
+<td><input type=submit value="Sign up"></td>
+</tr>
+
+</table>
+
+
+
+</form>
+

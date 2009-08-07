@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<title></title>
+<meta name="generator" content="perl2html 0.9.2">
+<meta name="date" content="2005-02-05T06:09:47+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><font color="#4169E1">package Gimble::Page::AddClan::Commit;</font>
+
+<font color="#4169E1">use base qw(Gimble::Page::AddClan::Base);</font>
+
+<font color="#4169E1">use Gimble::Session;</font>
+
+
+
+<strong><font color="#4169E1">sub engine </font></strong>{
+<font color="#4169E1">  my</font> ($self, $tree) = @_;
+
+<font color="#4169E1">  my</font> $tree = $self-&gt;SUPER::engine($tree;)
+
+  $tree-&gt;look_down(id =&gt; <font color="#228B22">'task_title'</font>)-&gt;replace_content(<font color="#228B22">'Clan Added'</font>);
+  $tree-&gt;look_down(<font color="#228B22">'_tag'</font> =&gt; <font color="#228B22">'form'</font>)-&gt;detach;
+
+  $self-&gt;snip_validate($tree);
+
+  $tree
+
+}
+
+
+<strong><font color="#4169E1">sub respond_enter </font></strong>{
+
+<font color="#4169E1">  my</font> $self = shift;
+
+<font color="#4169E1">  my</font> $sess = Gimble::Session::magick($self-&gt;CGI);
+
+<font color="#4169E1">  my</font> $clan = Gimble::Model::clan_t-&gt;create ({
+
+    map { 
+      warn <font color="#228B22">"</font>$_<font color="#228B22"> .. "</font> . $sess-&gt;param($_); 
+      $_ =&gt; $sess-&gt;param($_) 
+    }
+	qw(clan_abbrev clan_name clan_url)
+   });
+
+  warn $clan;
+
+}
+
+
+1;
+</pre>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+package Gimble::Page::NoAuthz::Base;
+
+use base qw(Gimble::Page::Base);
+
+sub template {  require html::rules;  html::rules->new }
+
+1;

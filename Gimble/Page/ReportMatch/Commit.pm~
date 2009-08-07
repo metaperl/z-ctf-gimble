@@ -1,0 +1,134 @@
+package Gimble::Page::ReportMatch::Commit;
+use strict;
+
+use Chess::Elo qw(:all);
+use Data::Dumper;
+use Gimble::Model::battle_t;
+use Gimble::Model::player_t;
+
+
+use base qw(Gimble::Page::ReportMatch::Confirm);
+
+sub template { require html::report_match_complete;  
+	       html::report_match_complete->new; }
+
+sub insert_hash {
+
+  my ($player, $opponent, $result) = @_;
+
+  warn "@_";
+
+  my $p = Gimble::Model::player_t->retrieve($player);
+  my $o = Gimble::Model::player_t->retrieve($opponent);
+
+  my %ret = ( 
+    p => { old => $p->elo_rating },
+    o => { old => $o->elo_rating }
+   ) ;
+
+  my $elo_arg;
+
+  my %insert;
+  if ($result == 1) { 
+    %insert = ( # player won
+      winning_player_id => $player,
+      losing_player_id  => $opponent,
+      battle_result     => 1
+     );
+    $elo_arg = 1;
+    
+  } elsif ($result == -1) {
+    %insert = ( #opponent won
+      winning_player_id => $opponent,
+      losing_player_id  => $player,
+      battle_result     => 1
+     );
+    $elo_arg = 0;
+
+  } else {
+    %insert = ( # draw
+      winning_player_id => $player,
+      losing_player_id  => $opponent,
+      battle_result     => 0
+     );
+    $elo_arg = 0.5;
+  }
+
+  my ($new_p, $new_o) = elo(
+    $p->elo_rating, 
+    $elo_arg,
+    $o->elo_rating, 
+   );
+
+  $p->elo_rating($new_p);
+  $o->elo_rating($new_o);
+
+  $ret{p}{new} = sprintf "%d", $new_p;
+  $ret{o}{new} = sprintf "%d", $new_o;
+
+  (\%insert, \%ret, $p, $o);
+
+}
+
+
+sub engine {
+  my ($self, $tree) = @_;
+
+  my %out;
+
+  my($p, $o);
+
+  for my $i (1..3) {
+    my @arg = (
+      $self->session->param('player_id'),
+      $self->session->param('opponent_id'),
+      $self->session->param("result_type_select$i")
+     );
+    my($insert_hash, $elo_delta);
+    ($insert_hash, $elo_delta, $p, $o) = insert_hash(@arg);
+    Gimble::Model::battle_t->create($insert_hash);
+    push @{$out{elo_delta}}, $elo_delta;
+    push @{$out{result}}, $self->english_results(@arg);
+  }
+
+  warn Dumper \%out;
+
+
+  # pull the map names out of the database and create the pulldwons
+  # to indicate the results
+  my $map = Gimble::Model::map_t->retrieve_all;
+
+  my($result, $elo_delta);
+  $tree->table(
+    gi_table => 'results',
+    gi_tr    => 'resiter',
+    table_data =>  $map,
+    tr_data => sub { 
+      $result    = shift @{$out{result}};
+      $elo_delta = shift @{$out{elo_delta}};
+      $map->next 
+    },
+    td_data => sub { 
+      my ($tr_node, $tr_data) = @_;
+      warn "@_";
+      $tr_node->content_handler(map_name => $tr_data->map_name);
+      $tr_node->look_down(id => 'result')->replace_content($result);
+
+      $tr_node->content_handler(screen_name => $p->screen_name);
+      $tr_node->content_handler(opponent    => $o->screen_name);
+
+
+      for my $po (qw(p o)) {
+	for my $oldnew (qw(old new)) {
+	  $tr_node->content_handler(
+	    "${po}_${oldnew}" => $elo_delta->{$po}->{$oldnew}
+	   );
+	}
+      }
+
+    }
+   );
+
+}
+
+1;
